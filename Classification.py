@@ -4,6 +4,7 @@
         A class to take in test data to then use to classify chinese sayings from a document
 '''
 
+
 class Classification:
     def __init__(self, training_doc_location, training_label_doc_location):
         self.class_1_total = 0
@@ -13,6 +14,7 @@ class Classification:
         self.list_of_total_words_1 = 0
         self.list_of_total_words_0 = 0
         self.list_of_total_distinct_words = []
+        self.list_of_prob = []
         count = 0
 
         file_1 = open(training_doc_location)
@@ -62,7 +64,6 @@ class Classification:
 
     def classify_new_senetence(self, doc_location):
         file_3 = open(doc_location)
-        list_of_prob = []
         prob_1 = float(self.prior_1)
         prob_0 = float(self.prior_0)
 
@@ -95,11 +96,15 @@ class Classification:
                 prob_0 *= float(prob)
 
             if prob_1 < prob_0:
-                list_of_prob.append('0')
+                self.list_of_prob.append('0')
             elif prob_1 > prob_0:
-                list_of_prob.append('1')
+                self.list_of_prob.append('1')
             else:
-                list_of_prob.append('ERROR, EITHER SAME PROBABILITY OR SOME KIND OF ERROR HAPPEN')
-        print('List of Classifications:')
-        for element in list_of_prob:
-            print(element)
+                self.list_of_prob.append('ERROR, EITHER SAME PROBABILITY OR SOME KIND OF ERROR HAPPEN')
+
+    def print_to_document(self, document_to_write):
+        file_4 = open(document_to_write, mode='w')
+
+        for element in self.list_of_prob:
+            file_4.write(element + '\n')
+        file_4.close()

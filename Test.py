@@ -12,3 +12,4 @@ from Classification import Classification
 c = Classification(r'C:\Users\depre\PycharmProjects\Classification_Assignment\traindata',
                    r'C:\Users\depre\PycharmProjects\Classification_Assignment\trainlabels')
 c.classify_new_senetence(r'C:\Users\depre\PycharmProjects\Classification_Assignment\testdataforclass')
+c.print_to_document(r'C:\Users\depre\PycharmProjects\Classification_Assignment\resultlabelsforclass')
